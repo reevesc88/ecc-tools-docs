@@ -39,13 +39,13 @@ A command may still open a pull request, because a person asked for that run. Th
 
 The run a command starts may still inspect the pull request head, or another branch the comment names. That target does not change which commit supplies `commands.enabled`.
 
-**Missing file.** On the commit selected above, a missing file keeps today's default. Push-triggered analysis stays allowed, and comment commands stay available.
+**Missing file.** On the commit selected above, a missing file leaves the push switch to the dashboard setting. If the dashboard has no setting, push-triggered analysis stays allowed. Comment commands stay available.
 
 ## Keys
 
 | Key | Values | When omitted |
 | --- | --- | --- |
-| `push.autoAnalyze` | boolean | Follow `autoPR.enabled` if that key is set. Otherwise allow push-triggered analysis. |
+| `push.autoAnalyze` | boolean | Follow `autoPR.enabled` if that key is set. Otherwise follow the dashboard setting, or allow push-triggered analysis if the dashboard has no setting. |
 | `autoPR.enabled` | boolean | Legacy alias of `push.autoAnalyze`. Ignored when `push.autoAnalyze` is set. `false` does **not** disable comment commands. |
 | `commands.enabled` | boolean | `true` |
 
@@ -53,7 +53,7 @@ The run a command starts may still inspect the pull request head, or another bra
 
 | `push.autoAnalyze` | `autoPR.enabled` | `commands.enabled` | Push | Comment command |
 | --- | --- | --- | --- | --- |
-| omitted | omitted | omitted or `true` | analyze allowed | runs |
+| omitted | omitted | omitted or `true` | follow dashboard; analyze allowed if unset | runs |
 | `false` | any | omitted or `true` | skip | runs |
 | omitted | `false` | omitted or `true` | skip | runs |
 | `true` | `false` | omitted or `true` | analyze allowed | runs |
